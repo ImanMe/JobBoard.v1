@@ -1,5 +1,5 @@
-﻿using JobBoard.Core.Models;
-using JobBoard.Core.IRepositories;
+﻿using JobBoard.Core.IRepositories;
+using JobBoard.Core.Models;
 using JobBoard.Persistence.Extensions;
 using JobBoard.Persistence.Helpers;
 using Microsoft.EntityFrameworkCore;
