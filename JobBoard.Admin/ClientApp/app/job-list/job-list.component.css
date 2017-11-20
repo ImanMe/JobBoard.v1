@@ -1,0 +1,74 @@
+th, td {
+    white-space: nowrap;
+    min-width: 55px;
+}
+
+.createdByTh {
+    min-width: 95px !important;
+}
+
+.actionBtn {
+    padding: 2px 7px;
+}
+
+.arrow {
+    cursor: pointer;
+}
+
+th {
+    font-size: 11px;
+    cursor: pointer;
+}
+
+td {
+    font-size: 12px;
+    vertical-align: middle !important;
+}
+
+input {
+    padding: 0;
+    font-family: Arial, FontAwesome;
+    border-width: 1px;
+    border-radius: 0;
+    padding-left: 2px;
+}
+
+.filterselect {
+    padding: 0;
+    font-size: 10px;
+    min-width: 55px;
+    border-width: 1px;
+    border-radius: 0;
+}
+
+    .filterselect:focus {
+        border-right: 0;
+        border-left: 0;
+        border-top: 0;
+        border-radius: 0;
+        border-bottom: 1px solid;
+    }
+
+input:focus {
+    border-right: 0;
+    border-left: 0;
+    border-top: 0;
+    border-radius: 0;
+    border-bottom: 1px solid;
+}
+
+.fa-filter {
+    color: #a9a9a9;
+}
+
+.btntd {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.inputtd {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 1px;
+    padding-right: 1px;
+}

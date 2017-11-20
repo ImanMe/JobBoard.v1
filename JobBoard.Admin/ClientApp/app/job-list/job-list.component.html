@@ -1,0 +1,190 @@
+<!--<a class="btn btn-success btn-sm pull-right" [routerLink]="['/admin/jobs/create']">Create New</a>-->
+<div class="text-center" *ngIf="!isDataLoaded"><i class="fa fa-circle-o-notch fa-spin fa-3x text-muted" aria-hidden="true"></i></div>
+<div *ngIf="isDataLoaded">
+    <div class="container-fluid">
+        <div class="pull-left">
+            <h4 style="text-transform: capitalize">{{query.listtype}}</h4>
+        </div>
+        <div class="pull-right">
+            <a style="margin-left:4px;" class="btn btn-success btn-sm" [routerLink]="['/admin/jobs/create']">Create New</a>
+        </div>
+        <div class="pull-right">
+            <select (change)="onFilterChange()" [(ngModel)]="query.listtype" class="btn btn-default btn-sm">
+                <option value=""></option>
+                <option value="conversion">Conversion</option>
+                <option value="listing">Listing</option>
+                <option value="duplicate">duplicate</option>
+            </select>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <br>
+        <table class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th class="text-center">Actions</th>
+                    <th><span (click)="sortBy('id')">Id</span></th>
+                    <th><span (click)="sortBy('isactive')">Status</span></th>
+                    <th><span (click)="sortBy('clonefromid')">CL</span></th>
+                    <th><span (click)="sortBy('evergreenid')">EG</span></th>
+                    <th><span (click)="sortBy('schedulingpod')">POD</span></th>
+                    <th><span (click)="sortBy('officeid')">Office</span></th>
+                    <th>
+                        <span class="pull-left" (click)="sortBy('title')">Title</span><span (click)="titleToggle()" class="fa fa-lg text-primary pull-right arrow"
+                                                                                            [ngClass]="{
+          'fa-angle-double-right':!isTitleExpanded,
+          'fa-angle-double-left':isTitleExpanded
+        }"></span>
+                    </th>
+                    <th><span (click)="sortBy('jobboard')">Job Board</span></th>
+                    <th><span (click)="sortBy('division')">Division</span></th>
+                    <th><span (click)="sortBy('city')">City</span></th>
+                    <th><span (click)="sortBy('state')">State</span></th>
+                    <th><span (click)="sortBy('country')">Country</span></th>
+                    <th><span (click)="sortBy('category')">Category</span></th>
+                    <th><span (click)="sortBy('company')">Company</span></th>
+                    <th><span (click)="sortBy('apscl')">ApsCl</span></th>
+                    <th><span (click)="sortBy('bob')">BOB</span></th>
+                    <th><span (click)="sortBy('intvs2')">2nds</span></th>
+                    <th><span (click)="sortBy('intvs')">Intvs</span></th>
+                    <th><span (click)="sortBy('activationdate')">Activation</span></th>
+                    <th><span (click)="sortBy('expirationdate')">Expiration</span></th>
+                    <th class="createdByTh">
+                        <span class="pull-left" (click)="sortBy('createdby')">CreatedBy</span><span (click)="createdByToggle()" class="fa fa-lg text-primary pull-right arrow"
+                                                                                                    [ngClass]="{
+            'fa-angle-double-right':!isCreatedByExpanded,
+            'fa-angle-double-left':isCreatedByExpanded
+          }"></span>
+                    </th>
+                    <th><span (click)="sortBy('createddate')">Created</span></th>
+                    <th>ActiveFor</th>
+                    <th>ActiveForThisWeek</th>
+                    <th>
+                        <span class="pull-left" (click)="sortBy('emailto')">Email</span><span (click)="emailToggle()" class="fa fa-lg text-primary pull-right arrow"
+                                                                                              [ngClass]="{
+            'fa-angle-double-right':!isEmailExpanded,
+            'fa-angle-double-left':isEmailExpanded
+          }"></span>
+                    </th>
+                    <th>Url</th>
+                </tr>
+                <tr class="inputtr">
+                    <td class="btntd">
+                        <button style="width:49%" title="Serach" (click)="onFilterChange()" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></button>
+                        <button style="width:49%" title="Reset Filters" (click)="resetFilter()" class="btn btn-sm btn-default"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                    </td>
+                    <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.id" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+                    <td class="inputtd">
+                        <select (change)="onFilterChange()" [(ngModel)]="query.isactive" class="form-control input-sm filterselect">
+                            <option value=""></option>
+                            <option value="true">Active</option>
+                            <option value="false">Expired</option>
+                        </select>
+                    </td>
+                    <td class="inputtd">
+                        <input (keyup.enter)="onFilterChange()" [(ngModel)]="query.clonefrom" type="text" class="form-control input-sm"
+                               placeholder="&#xf0b0;">
+                    </td>
+                    <td class="inputtd">
+                        <input (keyup.enter)="onFilterChange()" [(ngModel)]="query.evergreenid" type="text" class="form-control input-sm"
+                               placeholder="&#xf0b0;">
+                    </td>
+                    <td class="inputtd">
+                        <input (keyup.enter)="onFilterChange()" [(ngModel)]="query.schedulingPod" type="text" class="form-control input-sm"
+                               placeholder="&#xf0b0;">
+                    </td>
+                    <td class="inputtd">
+                        <input (keyup.enter)="onFilterChange()" [(ngModel)]="query.officeId" type="text" class="form-control input-sm"
+                               placeholder="&#xf0b0;">
+                    </td>
+                    <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.title" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+                    <td class="inputtd">
+                        <input (keyup.enter)="onFilterChange()" [(ngModel)]="query.jobboard" type="text" class="form-control input-sm"
+                               placeholder="&#xf0b0;">
+                    </td>
+                    <td class="inputtd">
+                        <input (keyup.enter)="onFilterChange()" [(ngModel)]="query.division" type="text" class="form-control input-sm"
+                               placeholder="&#xf0b0;">
+                    </td>
+                    <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.city" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+                    <td class="inputtd"><input (keyup.enter)="onFilterChange()" [(ngModel)]="query.state" type="text" class="form-control input-sm" placeholder="&#xf0b0;"></td>
+                    <td class="inputtd">
+                        <select (change)="onFilterChange()" [(ngModel)]="query.country" class="form-control input-sm filterselect">
+                            <option value=""></option>
+                            <option value="Un">US</option>
+                            <option value="CA">CA</option>
+                        </select>
+                    </td>
+                    <td class="inputtd">
+                        <input (keyup.enter)="onFilterChange()" [(ngModel)]="query.category" type="text" class="form-control input-sm"
+                               placeholder="&#xf0b0;">
+                    </td>
+                    <td class="inputtd">
+                        <input (keyup.enter)="onFilterChange()" [(ngModel)]="query.companyname" type="text" class="form-control input-sm"
+                               placeholder="&#xf0b0;">
+                    </td>
+                    <td class="inputtd"></td>
+                    <td class="inputtd"></td>
+                    <td class="inputtd"></td>
+                    <td class="inputtd"></td>
+                    <td class="inputtd"></td>
+                    <td class="inputtd"></td>
+                    <td class="inputtd">
+                        <input (keyup.enter)="onFilterChange()" [(ngModel)]="query.createdby" type="text" class="form-control input-sm"
+                               placeholder="&#xf0b0;">
+                    </td>
+                    <td class="inputtd"></td>
+                    <td class="inputtd"></td>
+                    <td class="inputtd"></td>
+                    <td class="inputtd"></td>
+                    <td class="inputtd"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let job of jobs.items">
+                    <td>
+                        <a [routerLink]="['/admin/jobs/edit', job.id]" class="btn btn-success btn-sm actionBtn" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <a [routerLink]="['/admin/jobs/clone', job.id]" class="btn btn-info btn-sm actionBtn" title="Clone"><i class="fa fa-clone" aria-hidden="true"></i></a>
+                        <button (click)="expire(job.id)" class="btn btn-warning btn-sm actionBtn" [disabled]="!job.isActive" title="Expire"><i class="fa fa-times expireicon" aria-hidden="true"></i></button>
+                        <button (click)="delete(job.id,$index)" class="btn btn-danger btn-sm actionBtn" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    </td>
+                    <td>{{job.id}}</td>
+                    <td class="text-center">
+                        <span class="fa fa-lg" [ngClass]="{
+          'fa-check text-success':job.isActive,
+          'fa-times text-danger':!job.isActive
+        }"></span>
+                    </td>
+                    <td>{{job.CloneFrom}}</td>
+                    <td>{{job.everGreenId}}</td>
+                    <td>{{job.schedulingPod}}</td>
+                    <td>{{job.officeId}}</td>
+                    <td>{{job.title | summary:titleLength}}</td>
+                    <td>{{job.jobBoard}}</td>
+                    <td>{{job.division}}</td>
+                    <td>{{job.city}}</td>
+                    <td>{{job.state}}</td>
+                    <td>{{job.country}}</td>
+                    <td>{{job.category}}</td>
+                    <td>{{job.companyName}}</td>
+                    <td>{{job.stat?.apsCl}}</td>
+                    <td>{{job.stat?.bob}}</td>
+                    <td>{{job.stat?.intvs2}}</td>
+                    <td>{{job.stat?.intvs}}</td>
+                    <td>{{job.activationDate}}</td>
+                    <td>{{job.expirationDate}}</td>
+                    <td>{{job.createdBy | summary:createdByLength}}</td>
+                    <td>{{job.createdDate}}</td>
+                    <td><span class="fa fa-search"></span></td>
+                    <td></td>
+                    <td>{{job.emailTo | summary:emailLength}}</td>
+                    <td><a [routerLink]="['/jobs/onlineapply', job.id]">Preview</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <pagination [total-items]="jobs.totalItems" [page-size]="PAGE_SIZE" (page-changed)="onPageChange($event)"></pagination>
+    </div>
+</div>
+

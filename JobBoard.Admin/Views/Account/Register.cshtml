@@ -1,0 +1,36 @@
+﻿@model JobBoard.Admin.DTOs.RegisterDto
+@{
+    ViewBag.Title = "Register";
+}
+<h3>Register</h3>
+<h5>Create a new account.</h5>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <label asp-for="Email" cl class="text-muted"></label>
+                <input asp-for="Email" cl class="form-control" />
+                <span class="text-warning" asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="text-muted"></label>
+                <input asp-for="Password" class="form-control" />
+                <span class="text-warning" asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="text-muted"></label>
+                <input asp-for="ConfirmPassword" class=" form-control" />
+                <span class="text-warning" asp-validation-for="ConfirmPassword"></span>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary btn-block">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+}

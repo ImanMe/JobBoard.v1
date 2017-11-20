@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="pull-left">
+            <h4>Registered Users</h4>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-success btn-sm" [routerLink]="['/admin/users/register']">New User</a>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <div class="table-responsive">
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th class="text-center">Actions</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let user of usersWithRole">
+                    <td class="text-center">
+                        <a [routerLink]="['/admin/users/editRole', user.userName]" class="btn btn-warning btn-sm actionBtn" title="Edit Role"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <button [disabled]="user.role==='NoAccess' || user.isNoAccess" class="btn btn-danger btn-sm actionBtn" title="Restrict Access" (click)="user.isNoAccess = !user.isNoAccess; banUser(user.userName)"><i class="fa fa-ban"></i></button>
+                    </td>
+                    <td>{{user.userName}}</td>
+                    <td *ngIf="user.isNoAccess">NoAccess</td>
+                    <td *ngIf="!user.isNoAccess">{{user.role}}</td>
+                </tr>
+                </tbody>       
+            </table>
+        </div>
+
+    </div>
+</div>

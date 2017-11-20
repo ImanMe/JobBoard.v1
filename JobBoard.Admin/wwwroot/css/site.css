@@ -1,0 +1,20 @@
+﻿
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#qrCode {
+    margin: 15px;
+}
+
+.dropdown-menu { 
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color: #2c3e50;
+    background-color: white;
+}
+   

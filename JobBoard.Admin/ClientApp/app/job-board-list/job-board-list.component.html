@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="pull-left">
+            <h4>Job Board</h4>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-success btn-sm" [routerLink]="['/admin/boards/create']">Create New</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <br>
+        <div class="table-responsive">
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th class="text-center">Actions</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th class="text-center">Online Apply</th>
+                    <th class="text-center">Email Apply</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let board of boards">
+                    <td class="text-center">
+                        <button title="Edit" class="btn btn-warning btn-sm actionBtn">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button>
+                        <button title="Delete" class="btn btn-danger btn-sm actionBtn">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                    <td>{{board.id}}</td>
+                    <td>{{board.name}}</td>
+                    <td class="text-center"><span class="fa" [ngClass]="{
+              'fa-check text-success':board.isOnlineApply,
+              'fa-times text-danger':!board.isOnlineApply
+            }"></span></td>
+                    <td class="text-center">
+                        <span class="fa" [ngClass]="{
+              'fa-check text-success':board.isEmailApply,
+              'fa-times text-danger':!board.isEmailApply
+            }"></span>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

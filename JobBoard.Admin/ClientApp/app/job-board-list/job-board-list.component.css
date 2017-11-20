@@ -1,0 +1,12 @@
+td, th {
+    vertical-align: middle !important;
+    white-space: nowrap;
+}
+
+th {
+    color: gray;
+}
+
+.actionBtn {
+    padding: 2px 7px;
+}

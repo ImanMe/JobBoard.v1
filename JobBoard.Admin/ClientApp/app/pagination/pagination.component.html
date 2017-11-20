@@ -1,0 +1,17 @@
+<nav *ngIf="totalItems > pageSize">
+    <ul class="pagination pagination-sm">
+        <li [class.disabled]="currentPage == 1">
+            <a class="pagetag" (click)="previous()" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li [class.active]="currentPage == page" *ngFor="let page of pages" (click)="changePage(page)">
+            <a class="pagetag" *ngIf="page < currentPage+5 && page > currentPage-5">{{ page }}</a>
+        </li>
+        <li [class.disabled]="currentPage == pages.length">
+            <a class="pagetag" (click)="next()" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
