@@ -3,6 +3,7 @@ using JobBoard.Admin.DTOs;
 using JobBoard.Admin.Enums;
 using JobBoard.Core;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -59,20 +60,28 @@ namespace JobBoard.Admin.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromRoute]int id, [FromBody]JobBoardUpdateDto jobBoardUpdateDto)
         {
-            var jobBoard = _unitOfWork.JobBoards.GetJobBoardAsync(id);
+            try
+            {
+                var jobBoard = await _unitOfWork.JobBoards.GetJobBoardAsync(id);
 
-            if (jobBoard == null) return NotFound();
+                if (jobBoard == null) return NotFound();
 
-            if (!ModelState.IsValid) return BadRequest();
+                if (!ModelState.IsValid) return BadRequest();
 
-            var jobBoardUpdated = _mapper
-                .Map<Core.Models.JobBoard>(jobBoardUpdateDto);
+                var jobBoardUpdated = _mapper
+                    .Map<Core.Models.JobBoard>(jobBoardUpdateDto);
 
-            _unitOfWork.JobBoards.Edit(jobBoardUpdated);
+                _unitOfWork.JobBoards.Edit(jobBoardUpdated);
 
-            await _unitOfWork.CompleteAsync();
+                await _unitOfWork.CompleteAsync();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         [HttpDelete("{id}")]

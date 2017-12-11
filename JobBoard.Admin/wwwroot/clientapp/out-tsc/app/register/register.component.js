@@ -57,7 +57,7 @@ var RegisterComponent = (function () {
     RegisterComponent.prototype.submit = function () {
         var _this = this;
         this.accountService.create(this.form.value)
-            .subscribe(function (a) { console.log(a), _this.router.navigate(['/admin/users']); });
+            .subscribe(function (a) { console.log(a), _this.router.navigate(['/board/users']); });
     };
     return RegisterComponent;
 }());

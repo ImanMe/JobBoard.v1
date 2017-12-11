@@ -6,12 +6,13 @@ using JobBoard.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace JobBoard.Admin.Controllers
 {
     [Route("api/jobs")]
-    [Authorize]
+    [AllowAnonymous]
     public class JobsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -62,19 +63,11 @@ namespace JobBoard.Admin.Controllers
 
             var job = _mapper.Map<Job>(jobCreateDto);
 
+            job.CreatedBy = "Bizli";
+
             await _unitOfWork.Jobs.AddAsync(job);
 
-            job.CreatedBy = "Iman";
-
-            try
-            {
-                await _unitOfWork.CompleteAsync();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            await _unitOfWork.CompleteAsync();
 
             var jobDto = _mapper.Map<JobDto>(job);
 
@@ -133,6 +126,34 @@ namespace JobBoard.Admin.Controllers
             job.Expire();
 
             _unitOfWork.Jobs.Edit(job);
+
+            await _unitOfWork.CompleteAsync();
+
+            return NoContent();
+        }
+
+        [HttpGet("BatchDeleteByPodId/{podId}")]
+        public async Task<IActionResult> BatchDeleteByPodId(int podId)
+        {
+            var jobs = await _unitOfWork.Jobs.GetJobsByPodId(podId);
+
+            if (!jobs.Any()) return NotFound();
+
+            _unitOfWork.Jobs.MassDelete(jobs);
+
+            await _unitOfWork.CompleteAsync();
+
+            return NoContent();
+        }
+
+        [HttpGet("BatchExpireByPodId/{podId}")]
+        public async Task<IActionResult> BatchExpireByPodId(int podId)
+        {
+            var jobs = await _unitOfWork.Jobs.GetJobsByPodId(podId);
+
+            if (!jobs.Any()) return NotFound();
+
+            await _unitOfWork.Jobs.MassExpire(podId);
 
             await _unitOfWork.CompleteAsync();
 

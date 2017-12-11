@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation.AspNetCore;
+using JobBoard.Admin.Services;
 using JobBoard.Admin.Validations;
 using JobBoard.Core;
 using JobBoard.Core.IRepositories;
@@ -30,6 +31,7 @@ namespace JobBoard.Admin.Extensions
             services.AddScoped<IJobOccupationRepository, JobOccupationRepository>();
             services.AddScoped<IStatRepository, StatRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IExcelService, ExcelService>();
             //services.AddTransient<JobBoardInitializer>();
             services.AddDbContext<JobBoardContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("JobBoardConnection")));

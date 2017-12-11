@@ -21,6 +21,19 @@ var JobBoardService = (function () {
         return this.http.get(this.endpoint + 'jobboards')
             .map(function (res) { return res.json(); });
     };
+    JobBoardService.prototype.getBoard = function (id) {
+        return this.http.get(this.endpoint + 'jobboards/' + id)
+            .map(function (res) { return res.json(); });
+    };
+    JobBoardService.prototype.create = function (board) {
+        return this.http.post(this.endpoint + 'JobBoards', board);
+    };
+    JobBoardService.prototype.update = function (id, board) {
+        return this.http.put(this.endpoint + 'JobBoards/' + id, board);
+    };
+    JobBoardService.prototype.delete = function (id) {
+        return this.http.delete(this.endpoint + 'JobBoards/' + id);
+    };
     return JobBoardService;
 }());
 JobBoardService = __decorate([

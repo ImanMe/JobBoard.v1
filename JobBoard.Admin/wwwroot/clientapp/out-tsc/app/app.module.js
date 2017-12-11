@@ -24,6 +24,14 @@ var http_1 = require("@angular/http");
 var register_component_1 = require("./register/register.component");
 var user_list_component_1 = require("./user-list/user-list.component");
 var edit_role_component_1 = require("./edit-role/edit-role.component");
+var job_board_form_component_1 = require("./job-board-form/job-board-form.component");
+var mass_operations_component_1 = require("./mass-operations/mass-operations.component");
+var reports_component_1 = require("./reports/reports.component");
+var active_report_component_1 = require("./active-report/active-report.component");
+var inactive_report_component_1 = require("./inactive-report/inactive-report.component");
+var createdby_report_component_1 = require("./createdby-report/createdby-report.component");
+var evergreen_report_component_1 = require("./evergreen-report/evergreen-report.component");
+var not_found_error_component_1 = require("./not-found-error/not-found-error.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -41,7 +49,15 @@ AppModule = __decorate([
             summary_pipe_1.SummaryPipe,
             register_component_1.RegisterComponent,
             user_list_component_1.UserListComponent,
-            edit_role_component_1.EditRoleComponent
+            edit_role_component_1.EditRoleComponent,
+            job_board_form_component_1.JobBoardFormComponent,
+            mass_operations_component_1.MassOperationsComponent,
+            reports_component_1.ReportsComponent,
+            active_report_component_1.ActiveReportComponent,
+            inactive_report_component_1.InactiveReportComponent,
+            createdby_report_component_1.CreatedbyReportComponent,
+            evergreen_report_component_1.EvergreenReportComponent,
+            not_found_error_component_1.NotFoundErrorComponent
         ],
         imports: [
             http_1.HttpModule,
@@ -49,16 +65,21 @@ AppModule = __decorate([
             forms_1.FormsModule,
             forms_1.ReactiveFormsModule,
             router_1.RouterModule.forRoot([
-                { path: '', redirectTo: 'admin/jobs', pathMatch: 'full' },
-                { path: 'admin/jobs', component: job_list_component_1.JobListComponent },
-                { path: 'admin/jobs/create', component: job_form_component_1.JobFormComponent },
-                { path: 'admin/jobs/edit/:id', component: job_form_component_1.JobFormComponent },
-                { path: 'admin/jobs/clone/:id', component: job_form_component_1.JobFormComponent },
-                { path: 'admin/boards', component: job_board_list_component_1.JobBoardListComponent },
-                { path: 'admin/users/register', component: register_component_1.RegisterComponent },
-                { path: 'admin/users/editRole/:id', component: edit_role_component_1.EditRoleComponent },
-                { path: 'admin/users', component: user_list_component_1.UserListComponent },
-                { path: '**', redirectTo: 'admin/jobs' }
+                { path: '', redirectTo: 'board/jobs', pathMatch: 'full' },
+                { path: 'board/jobs', component: job_list_component_1.JobListComponent },
+                { path: 'board/jobs/create', component: job_form_component_1.JobFormComponent },
+                { path: 'board/jobs/edit/:id', component: job_form_component_1.JobFormComponent },
+                { path: 'board/jobs/clone/:id', component: job_form_component_1.JobFormComponent },
+                { path: 'board/jobs/batch', component: mass_operations_component_1.MassOperationsComponent },
+                { path: 'board/boards', component: job_board_list_component_1.JobBoardListComponent },
+                { path: 'board/boards/form', component: job_board_form_component_1.JobBoardFormComponent },
+                { path: 'board/boards/form/:id', component: job_board_form_component_1.JobBoardFormComponent },
+                { path: 'board/users/register', component: register_component_1.RegisterComponent },
+                { path: 'board/users/editRole/:id', component: edit_role_component_1.EditRoleComponent },
+                { path: 'board/reports', component: reports_component_1.ReportsComponent },
+                { path: 'board/users', component: user_list_component_1.UserListComponent },
+                { path: 'notfound', component: not_found_error_component_1.NotFoundErrorComponent },
+                { path: '**', redirectTo: 'notfound' }
             ], { useHash: true, enableTracing: false })
         ],
         providers: [

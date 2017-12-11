@@ -43,6 +43,6 @@ export class EditRoleComponent implements OnInit {
     
     submit() {
         this.accountService.edit(this.user)
-            .subscribe(a => this.router.navigate(['/admin/users']));
+            .subscribe(a => this.router.navigate(['/board/users']));
     }
 }

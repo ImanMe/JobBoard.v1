@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobBoard.Core", "JobBoard.Core\JobBoard.Core.csproj", "{A37C67E6-7925-4CA7-9808-9E9CEF3F9F3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobBoard.Core", "JobBoard.Core\JobBoard.Core.csproj", "{A37C67E6-7925-4CA7-9808-9E9CEF3F9F3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobBoard.Persistence", "JobBoard.Persistence\JobBoard.Persistence.csproj", "{EBCE81F0-35AD-41FA-BF73-00821459EE55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobBoard.Persistence", "JobBoard.Persistence\JobBoard.Persistence.csproj", "{EBCE81F0-35AD-41FA-BF73-00821459EE55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobBoard.Admin", "JobBoard.Admin\JobBoard.Admin.csproj", "{3118D5FF-76E9-41C1-AF19-B26B4E325F41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobBoard.Admin", "JobBoard.Admin\JobBoard.Admin.csproj", "{3118D5FF-76E9-41C1-AF19-B26B4E325F41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

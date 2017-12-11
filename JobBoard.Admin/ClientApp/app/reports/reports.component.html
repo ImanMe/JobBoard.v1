@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="pull-left">
+            <p class="head">Reports</p>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-5">
+        <ul class="nav nav-tabs">
+            <li [class.active]="selectedReport == 'active'"><a (click)="selectedReport = 'active'">Active</a></li>
+            <li [class.active]="selectedReport == 'inactive'"><a (click)="selectedReport = 'inactive'">In-Active</a></li>
+            <li [class.active]="selectedReport == 'createdby'"><a (click)="selectedReport = 'createdby'">Created By</a></li>
+            <li [class.active]="selectedReport == 'evergreen'"><a (click)="selectedReport = 'evergreen'">Ever Green</a></li>
+        </ul>
+        <div [ngSwitch]="selectedReport" class="reports">
+            <div class="container-fluid">
+                <br>
+                <div *ngSwitchCase="'active'">
+                    <app-active-report></app-active-report>
+                </div>
+                <div *ngSwitchCase="'inactive'">
+                    <app-inactive-report></app-inactive-report>
+                </div>
+                <div *ngSwitchCase="'createdby'">
+                    <app-createdby-report></app-createdby-report>
+                </div>
+                <div *ngSwitchCase="'evergreen'">
+                    <app-evergreen-report></app-evergreen-report>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>

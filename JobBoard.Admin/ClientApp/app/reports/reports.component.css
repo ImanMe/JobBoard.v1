@@ -1,0 +1,18 @@
+a {
+    cursor: pointer;
+}
+
+.head {
+    font-size: x-large;
+    font-weight: 400;
+}
+
+.reports {
+    border: 1px solid #f2f2f2;
+    border-top: none;
+    background-color: #f2f2f2;
+}
+
+li.active > a {
+    background-color: #f2f2f2;
+}

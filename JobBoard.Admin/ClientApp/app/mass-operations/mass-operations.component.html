@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-sm-4 col-sm-offset-4 main">  
+        <h3 class="text-center text-muted">Mass Operations</h3>
+        <div class="form-group text-center">
+            <input ngModel name="podForMassExpire" #podForMassExpire class="form-control" placeholder="Scheduling Pod Id"/>           
+            <div *ngIf="!isNumberFirst"><span class="text-warning">Must be a number.</span></div>
+            <button class="btn btn-warning btn-sm" (click)="massExpire(podForMassExpire)">Mass Expire</button>
+        </div>
+        <br /><br />
+        <div class="form-group text-center">
+            <input ngModel name="podForMassDelete" #podForMassDelete class="form-control" placeholder="Scheduling Pod Id"/>           
+            <div *ngIf="!isNumberSecond"><span class="text-warning">Must be a number.</span></div>
+            <button class="btn btn-danger btn-sm" (click)="massDelete(podForMassDelete)">Mass Delete</button>
+            </div>
+        </div>
+</div>
+

@@ -18,9 +18,9 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listing Management<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['admin/jobs']">Jobs</a></li>
+                        <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['board/jobs']">Jobs</a></li>
                         <li role="separator" class="divider"></li>
-                        <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['admin/jobs/create']">Create</a></li>
+                        <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['board/jobs/create']">Create</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Stats Pending</a></li>
                     </ul>
@@ -28,16 +28,14 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Board Management<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['admin/boards']">Job Boards</a></li>
+                        <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['board/boards']">Job Boards</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Mass Delete</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Mass Expire</a></li>
+                        <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['board/jobs/batch']">Batch Operations</a></li>                      
                     </ul>
                 </li>                                
-                <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['admin/reports']">Reports</a></li>              
-                <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['admin/users']">User Management</a></li> 
-                <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['admin/reports']">Applicants</a></li>              
+                <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['board/reports']">Reports</a></li>              
+                <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['board/users']">User Management</a></li> 
+                <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['board/reports']">Applicants</a></li>              
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="account/logout" asp-controller="Account" asp-action="Logout"><i class="glyphicon glyphicon-log-out"></i></a></li>

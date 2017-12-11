@@ -66,6 +66,24 @@ namespace JobBoard.Admin.MappingProfiles
                     foreach (var f in addedFeatures)
                         v.Occupations.Add(f);
                 });
+
+            CreateMap<Job, ReportDto>()
+                .ForMember(dest => dest.JobBoard, opt => opt.MapFrom(src => src.JobBoard.JobBoardName))
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.CategoryName))
+                .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country.CountryCode))
+                .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State.StateName))
+                .ForMember(dest => dest.ActivationDate,
+                    opt => opt.MapFrom(src => src.ActivationDate.Date.ToShortDateString()))
+                .ForMember(dest => dest.CreatedDate,
+                    opt => opt.MapFrom(src => src.CreatedDate.Date.ToShortDateString()))
+                .ForMember(dest => dest.ExpirationDate,
+                    opt => opt.MapFrom(src => src.ExpirationDate.Date.ToShortDateString()))
+                .ForMember(dest => dest.PodId, opt => opt.MapFrom(src => src.SchedulingPod))
+                .ForMember(dest => dest.EmailApply, opt => opt.MapFrom(src => src.EmailTo))
+                .ForMember(dest => dest.OnlineUrl, opt => opt.MapFrom(src => src.OnlineApplyUrl));
+            //.ForMember(dest => dest.OnlineUrl, opt => opt.UseValue("THIS STRING"));
+
+
         }
     }
 }

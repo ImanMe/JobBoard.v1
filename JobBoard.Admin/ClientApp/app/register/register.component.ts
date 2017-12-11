@@ -41,7 +41,7 @@ private accountService: AccountService, fb: FormBuilder,
 
     submit() {
         this.accountService.create(this.form.value)
-            .subscribe(a => {console.log(a),this.router.navigate(['/admin/users'])});
+            .subscribe(a => { console.log(a), this.router.navigate(['/board/users'])});
     }
 
 }

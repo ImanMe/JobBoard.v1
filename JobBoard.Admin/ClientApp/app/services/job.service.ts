@@ -81,4 +81,12 @@ export class JobService {
     expire(id) {
         return this.http.get(this.endpoint + 'jobs/expire/' + id);
     }
+
+    massDelete(podId) {
+        return this.http.get(this.endpoint + 'jobs/BatchDeleteByPodId/' + podId);
+    }
+
+    massExpire(podId) {
+        return this.http.get(this.endpoint + 'jobs/BatchExpireByPodId/' + podId);
+    }
 }

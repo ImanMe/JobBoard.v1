@@ -10,3 +10,8 @@ th {
 .actionBtn {
     padding: 2px 7px;
 }
+
+.head {
+    font-size: x-large;
+    font-weight: 400;
+}

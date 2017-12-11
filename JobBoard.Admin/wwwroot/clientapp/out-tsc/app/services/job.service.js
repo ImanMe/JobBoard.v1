@@ -71,6 +71,12 @@ var JobService = (function () {
     JobService.prototype.expire = function (id) {
         return this.http.get(this.endpoint + 'jobs/expire/' + id);
     };
+    JobService.prototype.massDelete = function (podId) {
+        return this.http.get(this.endpoint + 'jobs/BatchDeleteByPodId/' + podId);
+    };
+    JobService.prototype.massExpire = function (podId) {
+        return this.http.get(this.endpoint + 'jobs/BatchExpireByPodId/' + podId);
+    };
     return JobService;
 }());
 JobService = __decorate([

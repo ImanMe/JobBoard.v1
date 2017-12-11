@@ -99,6 +99,48 @@ namespace JobBoard.Core.Models
 
         public Stat Stat { get; set; }
 
+        public int ActiveForThisWk => GetNumberOfActiveDaysInThisWeek();
+
+        public int ActiveFor => GetNumberOfActiveDays();
+
+        public string OnlineApplyUrl => GenerateOnlineApplyUrl();
+
+        private int GetNumberOfActiveDays()
+        {
+            var numberOfDays = DateTime.Now < ExpirationDate
+                ? (DateTime.Now - ActivationDate).Days + 1
+                : (ExpirationDate - ActivationDate).Days;
+
+            return numberOfDays;
+        }
+
+        private string GenerateOnlineApplyUrl()
+        {
+            return "http://board.thejobwindow.com/home/onlineapply/" + Id;
+        }
+
+        public int GetNumberOfActiveDaysInThisWeek()
+        {
+            if (ExpirationDate < DateTime.Now)
+                return 0;
+
+            var monday = DateTime.Today
+                .AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
+
+            monday = monday > DateTime.Today ? monday.AddDays(-7) : monday;
+
+            var startingDate = monday < ActivationDate ? ExpirationDate : monday;
+
+            var todayMinusMonday = (DateTime.Today - startingDate).Days + 1;
+
+            return todayMinusMonday;
+        }
+
+        public void SetCreateInfo(JobBoardUser user)
+        {
+            CreatedBy = user.Email;
+        }
+
         public void SetEditInfo(JobBoardUser user)
         {
             EditedBy = user.Email;

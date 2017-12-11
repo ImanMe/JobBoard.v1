@@ -1,0 +1,18 @@
+label {
+    color: gray;
+    font-size: small;
+}
+
+.fa-asterisk {
+    font-size: x-small;
+}
+
+.text-muted {
+    font-size: small;
+    font-style: italic;
+}
+
+.head {
+    font-size: x-large;
+    font-weight: 400;
+}

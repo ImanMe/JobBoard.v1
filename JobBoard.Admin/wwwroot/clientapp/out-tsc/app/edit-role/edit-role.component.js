@@ -42,7 +42,7 @@ var EditRoleComponent = (function () {
     EditRoleComponent.prototype.submit = function () {
         var _this = this;
         this.accountService.edit(this.user)
-            .subscribe(function (a) { return _this.router.navigate(['/admin/users']); });
+            .subscribe(function (a) { return _this.router.navigate(['/board/users']); });
     };
     return EditRoleComponent;
 }());

@@ -60,6 +60,58 @@ namespace JobBoard.Persistence.Extensions
             return query;
         }
 
+        public static IQueryable<Job> ApplyFilteringForActive(this IQueryable<Job> query, ReportQuery reportQuery)
+        {
+            if (reportQuery.Pod != 0)
+                query = query.Where(j => j.SchedulingPod == reportQuery.Pod);
+
+            if (reportQuery.JobBoardId != 0)
+                query = query.Where(j => j.JobBoardId == reportQuery.JobBoardId);
+
+            if (reportQuery.FromDate != null)
+                query = query.Where(j => j.ExpirationDate == reportQuery.FromDate);
+
+            if (reportQuery.JobBoardId != 0)
+                query = query.Where(j => j.JobBoardId == reportQuery.JobBoardId);
+
+            return query;
+        }
+
+        public static IQueryable<Job> ApplyFilteringForInActive(this IQueryable<Job> query, ReportQuery reportQuery)
+        {
+            query = query.Where(j => j.IsEverGreen == false);
+
+            query = query.Where(j => j.ExpirationDate < DateTime.Now);
+
+            if (reportQuery.Pod != 0)
+                query = query.Where(j => j.SchedulingPod == reportQuery.Pod);
+
+            if (reportQuery.JobBoardId != 0)
+                query = query.Where(j => j.JobBoardId == reportQuery.JobBoardId);
+
+            if (reportQuery.FromDate != null)
+                query = query.Where(j => j.ExpirationDate >= reportQuery.FromDate);
+
+            if (reportQuery.ToDate != null)
+                query = query.Where(j => j.ExpirationDate <= reportQuery.ToDate);
+
+            return query;
+        }
+
+        public static IQueryable<Job> ApplyFilteringForCreatedBy(this IQueryable<Job> query, ReportQuery reportQuery)
+        {
+            if (reportQuery.User != null)
+                query = query.Where(j => j.CreatedBy == reportQuery.User);
+
+            if (reportQuery.FromDate != null)
+                query = query.Where(j => j.CreatedDate >= reportQuery.FromDate);
+
+            if (reportQuery.ToDate != null)
+                query = query.Where(j => j.CreatedDate <= reportQuery.ToDate);
+
+            return query;
+        }
+
         public static IQueryable<T> ApplyOrdering<T>(this IQueryable<T> query, JobQuery queryObj, Dictionary<string, Expression<Func<T, object>>> columnsMap)
         {
             if (string.IsNullOrWhiteSpace(queryObj.SortBy) || !columnsMap.ContainsKey(queryObj.SortBy))
@@ -152,6 +204,55 @@ namespace JobBoard.Persistence.Extensions
                 .ThenBy(j => j.SchedulingPod)
                 .ThenBy(j => j.Title)
                 .ThenBy(j => j.Id);
+
+            return query;
+        }
+
+        public static IQueryable<Job> SortForActiveReports(this IQueryable<Job> query)
+        {
+            query = query
+                 .OrderBy(j => j.SchedulingPod)
+                 .ThenBy(j => j.JobBoard.JobBoardName)
+                 .ThenBy(j => j.City)
+                 .ThenBy(j => j.Category.CategoryName)
+                 .ThenBy(j => j.ExpirationDate)
+                 .ThenByDescending(j => j.Stat.ApsCl)
+                 .ThenByDescending(j => j.Stat.Bob)
+                 .ThenByDescending(j => j.Stat.Intvs2)
+                 .ThenByDescending(j => j.Stat.Intvs);
+
+            return query;
+        }
+
+        public static IQueryable<Job> SortForInActiveReports(this IQueryable<Job> query)
+        {
+            query = query
+                .OrderBy(m => m.SchedulingPod)
+                .ThenBy(m => m.JobBoard.JobBoardName)
+                .ThenBy(m => m.City)
+                .ThenBy(m => m.Category.CategoryName)
+                .ThenBy(m => m.ExpirationDate)
+                .ThenByDescending(j => j.Stat.ApsCl)
+                .ThenByDescending(j => j.Stat.Bob)
+                .ThenByDescending(j => j.Stat.Intvs2)
+                .ThenByDescending(j => j.Stat.Intvs);
+
+            return query;
+        }
+
+        public static IQueryable<Job> SortForCreatedByReports(this IQueryable<Job> query)
+        {
+            query = query
+                .OrderBy(j => j.SchedulingPod)
+                .ThenBy(j => j.JobBoard.JobBoardName)
+                .ThenBy(j => j.City)
+                .ThenBy(j => j.Category.CategoryName)
+                .ThenByDescending(j => j.ExpirationDate >= DateTime.Now)
+                .ThenByDescending(j => j.Stat.ApsCl)
+                .ThenByDescending(j => j.Stat.Bob)
+                .ThenByDescending(j => j.Stat.Intvs2)
+                .ThenByDescending(j => j.Stat.Intvs)
+                .ThenByDescending(j => j.Id);
 
             return query;
         }
