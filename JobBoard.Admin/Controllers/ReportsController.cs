@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace JobBoard.Admin.Controllers
 {
-    [Route("api/jobs")]
+    [Route("api/reports")]
     [AllowAnonymous]
     public class ReportsController : Controller
     {
@@ -26,58 +26,19 @@ namespace JobBoard.Admin.Controllers
             _excelService = excelService;
         }
 
-        [HttpGet("everGreen")]
-        public async Task<IActionResult> EverGreen()
+        [HttpGet]
+        public async Task<IActionResult> Get(ReportQueryDto reportQueryDto)
         {
-            var jobs = await _unitOfWork.Jobs.GetJobsForEverGreenReport();
+            var reportQuery = _mapper.Map<ReportQuery>(reportQueryDto);
+
+            var jobs = await _unitOfWork.Jobs.GetJobsForReport(reportQuery);
 
             var jobsDto = _mapper.Map<IList<ReportDto>>(jobs);
 
             var reportBytes = _excelService.CreateExcelPackage(jobsDto);
 
-            return File(reportBytes, ReportName.XlsxContentType, ReportName.EverGreen);
-        }
-
-        [HttpGet("active")]
-        public async Task<IActionResult> Active(ReportQueryDto reportQueryDto)
-        {
-            var jobQuery = _mapper.Map<ReportQuery>(reportQueryDto);
-
-            var jobs = await _unitOfWork.Jobs.GetJobsForActiveReport(jobQuery);
-
-            var jobsDto = _mapper.Map<IList<ReportDto>>(jobs);
-
-            var reportBytes = _excelService.CreateExcelPackage(jobsDto);
-
-            return File(reportBytes, ReportName.XlsxContentType, ReportName.Active);
-        }
-
-        [HttpGet("inActive")]
-        public async Task<IActionResult> InActive(ReportQueryDto reportQueryDto)
-        {
-            var jobQuery = _mapper.Map<ReportQuery>(reportQueryDto);
-
-            var jobs = await _unitOfWork.Jobs.GetJobsForInActiveReport(jobQuery);
-
-            var jobsDto = _mapper.Map<IList<ReportDto>>(jobs);
-
-            var reportBytes = _excelService.CreateExcelPackage(jobsDto);
-
-            return File(reportBytes, ReportName.XlsxContentType, ReportName.InActive);
-        }
-
-        [HttpGet("createdBy")]
-        public async Task<IActionResult> CreatedBy(ReportQueryDto reportQueryDto)
-        {
-            var jobQuery = _mapper.Map<ReportQuery>(reportQueryDto);
-
-            var jobs = await _unitOfWork.Jobs.GetJobsForCreatedByReport(jobQuery);
-
-            var jobsDto = _mapper.Map<IList<ReportDto>>(jobs);
-
-            var reportBytes = _excelService.CreateExcelPackage(jobsDto);
-
-            return File(reportBytes, ReportName.XlsxContentType, ReportName.CreatedBy);
+            return File(reportBytes, ExcelEnums.XlsxContentType,
+                reportQuery.ReportType + ExcelEnums.ExcelExtension);
         }
     }
 }

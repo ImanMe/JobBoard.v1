@@ -9,5 +9,6 @@ namespace JobBoard.Admin.DTOs
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
         public string User { get; set; }
+        public string ReportType { get; set; }
     }
 }

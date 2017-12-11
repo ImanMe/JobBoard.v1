@@ -60,6 +60,34 @@ namespace JobBoard.Persistence.Extensions
             return query;
         }
 
+        public static IQueryable<Job> ApplyFilteringForReports(this IQueryable<Job> query, ReportQuery reportQuery)
+        {
+            if (reportQuery.ReportType == ListType.Active)
+            {
+                query = query.ApplyFilteringForActive(reportQuery);
+                return query;
+            }
+            else if (reportQuery.ReportType == ListType.InActive)
+            {
+                query = query.ApplyFilteringForInActive(reportQuery);
+                return query;
+            }
+            else if (reportQuery.ReportType == ListType.CreatedBy)
+            {
+                query = query.ApplyFilteringForCreatedBy(reportQuery);
+                return query;
+            }
+            else if (reportQuery.ReportType == ListType.EverGreen)
+            {
+                query = query.ApplyFilteringForEverGreen(reportQuery);
+                return query;
+            }
+            else
+            {
+                return query;
+            }
+        }
+
         public static IQueryable<Job> ApplyFilteringForActive(this IQueryable<Job> query, ReportQuery reportQuery)
         {
             if (reportQuery.Pod != 0)
@@ -112,6 +140,13 @@ namespace JobBoard.Persistence.Extensions
             return query;
         }
 
+        public static IQueryable<Job> ApplyFilteringForEverGreen(this IQueryable<Job> query, ReportQuery reportQuery)
+        {
+            query = query.Where(j => j.IsEverGreen);
+
+            return query;
+        }
+
         public static IQueryable<T> ApplyOrdering<T>(this IQueryable<T> query, JobQuery queryObj, Dictionary<string, Expression<Func<T, object>>> columnsMap)
         {
             if (string.IsNullOrWhiteSpace(queryObj.SortBy) || !columnsMap.ContainsKey(queryObj.SortBy))
@@ -144,6 +179,20 @@ namespace JobBoard.Persistence.Extensions
 
             else if (queryObj.ListType == ListType.Stats)
                 query = query.SortForStatsPending();
+
+            return query;
+        }
+
+        public static IQueryable<Job> SortBasedOnReportType(this IQueryable<Job> query, ReportQuery queryObj)
+        {
+            if (queryObj.ReportType == ListType.Active)
+                query = query.SortForActiveReports();
+
+            else if (queryObj.ReportType == ListType.InActive)
+                query = query.SortForInActiveReports();
+
+            else if (queryObj.ReportType == ListType.CreatedBy)
+                query = query.SortForCreatedByReports();
 
             return query;
         }

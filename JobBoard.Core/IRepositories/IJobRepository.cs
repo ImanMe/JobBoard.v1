@@ -14,9 +14,6 @@ namespace JobBoard.Core.IRepositories
         Task<IList<Job>> GetJobsByPodId(int podId);
         void MassDelete(IList<Job> jobsToDelete);
         Task MassExpire(int podId);
-        Task<IList<Job>> GetJobsForEverGreenReport();
-        Task<IList<Job>> GetJobsForActiveReport(ReportQuery reportQuery);
-        Task<IList<Job>> GetJobsForInActiveReport(ReportQuery reportQuery);
-        Task<IList<Job>> GetJobsForCreatedByReport(ReportQuery reportQuery);
+        Task<IList<Job>> GetJobsForReport(ReportQuery queryObj);
     }
 }
